@@ -1,0 +1,7 @@
+This is a fully functioning Web Scraping Program of Internshala website.
+
+Find Internships in your favorite domain using this Python Script.
+
+Please add some other functionalities also, to improve this Program,
+
+make pull requests also, and share it with your Friends too.
