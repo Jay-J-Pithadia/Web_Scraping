@@ -188,51 +188,56 @@ while d=="y" or d=="Y":
 
         if i in available:
             s = value[available.index(i)]
-
-        print()
-
-        html_txt = requests.get(f"https://internshala.com/internships/"+str(s)+"-internship/").text
-
-        soup = BeautifulSoup(html_txt,"lxml")
-
-        interships = soup.find("div", id = "internship_list_container_1")
-
-        individual_internships = interships.find_all("div", class_ = "heading_4_5 profile")
-
-        company_name = interships.find_all("a", class_ = "link_display_like_text")
-
-        location = interships.find_all("div", id = "location_names")
-
-        link = interships.find_all("div", class_ = "button_container")
-
-        other_details = interships.find_all("div", class_ ="internship_other_details_container")
-
-        for a,b,c,d,e in zip(individual_internships,company_name,location,link,other_details):
-            print(f"Internship Topic : {a.text.strip()}")
-            print()
-            print("Company Name :", b.text.strip())
             print()
 
-            x = c.span.find_all("a",class_ = "location_link")
-            y = []
-            for i in x:
-                y.append(i.text)
+            html_txt = requests.get(f"https://internshala.com/internships/"+str(s)+"-internship/").text
 
-            print("Location of Internship :",y)
+            soup = BeautifulSoup(html_txt,"lxml")
+
+            interships = soup.find("div", id = "internship_list_container_1")
+
+            individual_internships = interships.find_all("div", class_ = "heading_4_5 profile")
+
+            company_name = interships.find_all("a", class_ = "link_display_like_text")
+
+            location = interships.find_all("div", id = "location_names")
+
+            link = interships.find_all("div", class_ = "button_container")
+
+            other_details = interships.find_all("div", class_ ="internship_other_details_container")
+
+            for a,b,c,d,e in zip(individual_internships,company_name,location,link,other_details):
+                print(f"Internship Topic : {a.text.strip()}")
+                print()
+                print("Company Name :", b.text.strip())
+                print()
+
+                x = c.span.find_all("a",class_ = "location_link")
+                y = []
+                for i in x:
+                    y.append(i.text)
+
+                print("Location of Internship :",y)
+                print()
+                print("More Information : https://internshala.com"+str(d.a["href"]))
+                print()
+                print("Stipend (in Rs.) :", e.find_all("div",class_="item_body")[2].text.strip())
+                print()
+                print("Last date to apply :", e.find_all("div",class_="item_body")[3].text.strip())
+                print()
+                print("Duration :", e.find_all("div",class_="item_body")[1].text.strip())
+                print()
+                print()
+                print()
+                print()
+            d = input("Do You Want to Continue (y/n): ")
             print()
-            print("More Information : https://internshala.com"+str(d.a["href"]))
+
+        else:
+            print("Please choose from available Topics to get accurate results...")
             print()
-            print("Stipend (in Rs.) :", e.find_all("div",class_="item_body")[2].text.strip())
+            d = input("Do You Want to Continue (y/n): ")
             print()
-            print("Last date to apply :", e.find_all("div",class_="item_body")[3].text.strip())
-            print()
-            print("Duration :", e.find_all("div",class_="item_body")[1].text.strip())
-            print()
-            print()
-            print()
-            print()
-        d = input("Do You Want to Continue (y/n): ")
-        print()
 
     else:
         print("Wrong Choice")
